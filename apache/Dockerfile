@@ -5,11 +5,11 @@ FROM php:7.2-apache
 RUN apt-get update
 
 # Switch to standard user
-RUN useradd -m standarduser
+RUN useradd -m matthewslouismarie
 RUN apt-get install -y sudo
 COPY config/sudoers /etc/sudoers.d/sudoers
 RUN chmod 0444 /etc/sudoers.d/sudoers
-USER standarduser
+USER matthewslouismarie
 
 # Packages
 RUN sudo apt-get install -y wget git zlib1g-dev gnupg2
@@ -36,5 +36,9 @@ RUN sudo npm install -g grunt-cli
 
 # Set working directory
 WORKDIR /var/www/html
+
+# Set permissions
+RUN sudo mkdir symfony
+RUN sudo chown -cR matthewslouismarie: symfony
 
 CMD sudo apache2-foreground

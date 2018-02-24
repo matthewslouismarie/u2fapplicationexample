@@ -7,7 +7,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./symfony/:/var/www/html/
+      - ./symfony:/var/www/html/symfony
   mariadb:
     environment:
       - MYSQL_ROOT_PASSWORD=mypassword
