@@ -17,13 +17,24 @@ RUN sudo apt-get install -y wget git zlib1g-dev gnupg2
 # PHP configuration
 RUN sudo docker-php-ext-install pdo_mysql zip
 
+# Fix Apache warning
+RUN sudo echo "ServerName 172.16.240.10" | sudo tee /etc/apache2/conf-available/servername.conf
+
 # Apache URL configuration
+COPY tls/apache-selfsigned.key /etc/ssl/private/apache-selfsigned.key
+COPY tls/apache-selfsigned.crt /etc/ssl/certs/apache-selfsigned.crt
+COPY tls/dhparam.pem /etc/ssl/certs/dhparam.pem
+COPY tls/ssl-params.conf /etc/apache2/conf-available/ssl-params.conf
+COPY tls/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 RUN sudo a2enmod rewrite
 RUN sudo a2enmod headers
 COPY config/000-default.conf /etc/apache2/sites-available
 
-# Fix Apache warning
-RUN sudo echo "ServerName 172.16.240.10" | sudo tee /etc/apache2/conf-available/servername.conf
+# Apache TLS
+RUN sudo a2enmod ssl
+RUN sudo a2ensite default-ssl
+RUN sudo a2enconf ssl-params
+RUN sudo a2enconf servername
 
 # Install Composer
 WORKDIR /usr/local/bin
