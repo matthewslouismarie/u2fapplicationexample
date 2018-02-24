@@ -4,35 +4,35 @@ namespace App\Submission;
 
 class LoginSubmission
 {
-    private $memberId;
+    private $password;
 
-    private $memberPassword;
+    private $username;
 
     public function __construct(
-        ?string $memberId = null, 
-        ?string $memberPassword = null)
+        ?string $password = null, 
+        ?string $username = null)
     {
-        $this->memberId = $memberId;
-        $this->memberPassword = $memberPassword;
+        $this->password = $password;
+        $this->username = $username;
     }
 
-    public function getMemberId(): ?string
+    public function getPassword(): ?string
     {
-        return $this->memberId;
+        return $this->password;
     }
 
-    public function getMemberPassword(): ?string
+    public function getUsername(): ?string
     {
-        return $this->memberPassword;
+        return $this->username;
     }
 
-    public function setMemberId(?string $memberId): void
+    public function setPassword(?string $password): void
     {
-        $this->memberId = $memberId;
+        $this->password = $password;
     }
 
-    public function setMemberPassword(?string $memberPassword): void
+    public function setUsername(?string $username): void
     {
-        $this->memberPassword = $memberPassword;
+        $this->username = $username;
     }
 }

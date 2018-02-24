@@ -58,7 +58,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $user = $this
             ->om
             ->getRepository(Member::class)->findOneBy(array(
-                'username' => $credentials->getMemberId(),
+                'username' => $credentials->getUsername(),
             ));
 
         return $user;
@@ -68,7 +68,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         return $this
             ->encoder
-            ->isPasswordValid($user, $credentials->getMemberPassword())
+            ->isPasswordValid($user, $credentials->getPassword())
         ;
     }
 
