@@ -32,8 +32,6 @@ class UserSettingsController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $member = $this->getUser();
-            var_dump($member);
-            var_dump($submission->getPassword());
             $newPassword = $encoder
                 ->encodePassword($member, $submission->getPassword())
             ;
