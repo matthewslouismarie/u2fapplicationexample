@@ -17,9 +17,10 @@ RUN sudo apt-get install -y wget git zlib1g-dev gnupg2
 # PHP configuration
 RUN sudo docker-php-ext-install pdo_mysql zip
 
-# Allow URL rewriting
+# Apache URL configuration
 RUN sudo a2enmod rewrite
 RUN sudo a2enmod headers
+COPY config/000-default.conf /etc/apache2/sites-available
 
 # Install Composer
 WORKDIR /usr/local/bin
