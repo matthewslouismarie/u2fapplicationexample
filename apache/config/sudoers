@@ -1,0 +1,1 @@
+standarduser ALL=(root) NOPASSWD:ALL
