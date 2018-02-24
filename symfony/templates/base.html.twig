@@ -11,6 +11,7 @@
                 <li><a href="{{ path('home') }}">Homepage</a></li>
                 {% if is_granted('ROLE_USER') %}
                 <li><a href="{{ path('settings') }}">Settings</a></li>
+                <li><a href="{{ path('security_logout') }}">Log out</a></li>
                 {% else %}
                 <li><a href="{{ path('security_login') }}">Login</a></li>
                 <li><a href="{{ path('registration') }}">Register</a></li>
