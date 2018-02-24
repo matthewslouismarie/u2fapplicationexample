@@ -35,11 +35,11 @@ RUN sudo curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 RUN sudo apt-get install -y nodejs
 RUN sudo npm install -g grunt-cli
 
-# Set working directory
-WORKDIR /var/www/html
-
 # Set permissions
-RUN sudo mkdir symfony
-RUN sudo chown -cR matthewslouismarie: symfony
+RUN sudo mkdir /var/www/html/symfony
+RUN sudo chown -cR matthewslouismarie: /var/www/html/symfony
+
+# Set working directory
+WORKDIR /var/www/html/symfony
 
 CMD sudo apache2-foreground
