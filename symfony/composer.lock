@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "38e221e17b19fd66c22dbcbfc601f0da",
+    "content-hash": "4275cb0d036918522d12982a268b07fa",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1041,6 +1041,59 @@
                 "orm"
             ],
             "time": "2017-12-20T00:38:15+00:00"
+        },
+        {
+            "name": "firehed/u2f",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Firehed/u2f-php.git",
+                "reference": "8438a88472d68f0e9a8ee1281c5b0a44e297c051"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Firehed/u2f-php/zipball/8438a88472d68f0e9a8ee1281c5b0a44e297c051",
+                "reference": "8438a88472d68f0e9a8ee1281c5b0a44e297c051",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "firehed/arctools": "^1",
+                "phpunit/phpunit": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firehed\\U2F\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Stern",
+                    "email": "eric@ericstern.com"
+                }
+            ],
+            "description": "A library providing U2F authentication",
+            "homepage": "https://github.com/Firehed/u2f-php",
+            "keywords": [
+                "Authentication",
+                "MFA",
+                "auth",
+                "security",
+                "u2f",
+                "yubico",
+                "yubikey"
+            ],
+            "time": "2018-02-12T03:47:39+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3934,6 +3987,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "firehed/u2f": 20,
         "symfony/lts": 20
     },
     "prefer-stable": false,
