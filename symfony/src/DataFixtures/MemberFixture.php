@@ -3,8 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Member;
-use App\Entity\U2fToken;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

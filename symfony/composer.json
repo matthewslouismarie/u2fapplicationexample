@@ -8,6 +8,7 @@
         "firehed/u2f": "dev-master",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",
+        "symfony/asset": "^4.0",
         "symfony/console": "^4.0",
         "symfony/expression-language": "^4.0",
         "symfony/flex": "^1.0",

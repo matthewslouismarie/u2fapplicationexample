@@ -6,3 +6,17 @@
 <h1>Register!</h1>
 {{ form(form) }}
 {% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('u2f-api.js') }}"></script>
+<script src="{{ asset('jquery.min.js') }}"></script>
+<script>
+    const completeRegistration = function fCompleteRegistration(u2fResponse)
+    {
+        $('#{{ form.u2fResponse.vars.id }}').val(JSON.stringify(u2fResponse));
+    }
+    var request = {{ u2fRegisterRequest | raw }};
+    var signRequests = {{ u2fSignRequests | raw }};
+    u2f.register([request], signRequests, completeRegistration);
+</script>
+{% endblock %}

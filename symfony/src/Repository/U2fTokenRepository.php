@@ -2,14 +2,14 @@
 
 namespace App\Repository;
 
-use App\Entity\Member;
+use App\Entity\U2fToken;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class MemberRepository extends ServiceEntityRepository
+class U2fTokenRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Member::class);
+        parent::__construct($registry, U2fToken::class);
     }
 }
