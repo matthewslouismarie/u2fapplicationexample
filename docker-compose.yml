@@ -8,9 +8,22 @@ services:
       - 80:80
     volumes:
       - ./symfony:/var/www/html/symfony
+    networks:
+      app_net:
+        ipv4_address: 172.16.240.10
   mariadb:
     environment:
       - MYSQL_ROOT_PASSWORD=mypassword
     image: mariadb:10.2.11
     ports:
       - 3306:3306
+    networks:
+      app_net:
+        ipv4_address: 172.16.240.9
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.240.0/24
