@@ -22,6 +22,9 @@ RUN sudo a2enmod rewrite
 RUN sudo a2enmod headers
 COPY config/000-default.conf /etc/apache2/sites-available
 
+# Fix Apache warning
+RUN sudo echo "ServerName 172.16.240.10" | sudo tee /etc/apache2/conf-available/servername.conf
+
 # Install Composer
 WORKDIR /usr/local/bin
 COPY scripts/install-composer .
