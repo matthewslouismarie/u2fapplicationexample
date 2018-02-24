@@ -27,7 +27,7 @@ class SecurityController extends AbstractController
     
         $form = $this
             ->createForm(LoginForm::class, new LoginSubmission($lastUsername))
-            ->add('button', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
 
         return $this->render('security/login.html.twig', array(
