@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\LoginForm;
+use App\Submission\LoginSubmission;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,11 +24,9 @@ class SecurityController extends AbstractController
 
         // last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
-
+    
         $form = $this
-            ->createForm(LoginForm::class, [
-                '_username' => $lastUsername,
-            ])
+            ->createForm(LoginForm::class, new LoginSubmission($lastUsername))
             ->add('button', SubmitType::class)
         ;
 
