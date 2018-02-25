@@ -45,4 +45,17 @@ class U2fTokenRepository extends ServiceEntityRepository
 
         return $u2fRegistrations;
     }
+
+    public function updateCounter(Registration $registration): void
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb
+            ->update()
+            ->set('u.counter', $registration->getCounter())
+            ->where('u.publicKey = :publicKey')
+            ->setParameter('publicKey', base64_encode($registration->getPublicKey()))
+            ->getQuery()
+            ->execute()
+        ;
+    }
 }

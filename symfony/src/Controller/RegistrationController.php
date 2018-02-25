@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
      *  "/register",
      *  name="registration")
      */
-    public function getRegister(
+    public function register(
         EntityManagerInterface $em,
         MemberRepository $mr,
         Request $request,

@@ -26,8 +26,6 @@ class SecurityController extends AbstractController
      */
     public function login(Request $httpRequest)
     {
-
-
         $formSubmission = new LoginSubmission();
         $form = $this
             ->createForm(LoginForm::class, $formSubmission)
@@ -79,7 +77,7 @@ class SecurityController extends AbstractController
             ->createForm(U2fAuthenticationForm::class, $u2fSubmission)
             ->add('submit', SubmitType::class)
         ;
-
+        var_dump($u2fRegistrations);
         $form->handleRequest($httpRequest);
         if ($form->isSubmitted() && $form->isValid()) {
             $u2fServer = $u2fService->getServer();
@@ -93,6 +91,11 @@ class SecurityController extends AbstractController
                 ->getU2fTokenResponse())
             ;
             $registration = $u2fServer->authenticate($response);
+
+            $em
+                ->getRepository(U2fToken::class)
+                ->updateCounter($registration)
+            ;
         }
 
         $httpRequest
