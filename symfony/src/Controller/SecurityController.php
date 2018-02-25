@@ -77,7 +77,7 @@ class SecurityController extends AbstractController
             ->createForm(U2fAuthenticationForm::class, $u2fSubmission)
             ->add('submit', SubmitType::class)
         ;
-        var_dump($u2fRegistrations);
+
         $form->handleRequest($httpRequest);
         if ($form->isSubmitted() && $form->isValid()) {
             $u2fServer = $u2fService->getServer();
@@ -96,6 +96,14 @@ class SecurityController extends AbstractController
                 ->getRepository(U2fToken::class)
                 ->updateCounter($registration)
             ;
+
+            $credentialsArray['checked_and_valid'] = true;
+            $httpRequest
+                ->getSession()
+                ->set('credentials', $credentialsArray)
+            ;
+
+            return new RedirectResponse($this->generateUrl('process_login'));
         }
 
         $httpRequest
@@ -107,6 +115,16 @@ class SecurityController extends AbstractController
             'form' => $form->createView(),
             'u2fSignRequests' => json_encode($u2fSignRequests),
         ]);
+    }
+
+    /**
+     * @Route(
+     *  "/process-login",
+     *  name="process_login",
+     *  methods={"GET"})
+     */
+    public function processLogin()
+    {
     }
 
     /**

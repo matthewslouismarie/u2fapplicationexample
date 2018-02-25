@@ -41,16 +41,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getCredentials(Request $request)
     {
-        $submission = new LoginSubmission();
-        $form = $this
-            ->formFactory
-            ->create(LoginForm::class, $submission);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $submission;
-        }
+        $credentials = $request
+            ->getSession()
+            ->get('credentials')
+        ;
 
-        throw new AuthenticationException();
+        if (!is_array($credentials)) {
+            throw new AuthenticationException();
+        } else {
+            return $credentials;
+        }
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -58,7 +58,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $user = $this
             ->om
             ->getRepository(Member::class)->findOneBy(array(
-                'username' => $credentials->getUsername(),
+                'username' => $credentials['username'],
             ));
 
         return $user;
@@ -66,10 +66,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this
-            ->encoder
-            ->isPasswordValid($user, $credentials->getPassword())
-        ;
+        return true === $credentials['checked_and_valid'];
     }
 
     protected function getLoginUrl()
@@ -87,14 +84,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request): bool
     {
-        return false;
-        // $route = $request
-        //     ->attributes
-        //     ->get('_route')
-        // ;
-        // $isRouteCorrect = 'security_login' === $route;
-        // $isMethodCorrect = $request->isMethod('POST');
+        $route = $request
+            ->attributes
+            ->get('_route')
+        ;
+        $isRouteCorrect = 'process_login' === $route;
+        $isMethodCorrect = $request->isMethod('GET');
 
-        // return $isRouteCorrect && $isMethodCorrect;
+        return $isRouteCorrect && $isMethodCorrect;
     }
 }
