@@ -12,4 +12,16 @@ class MemberRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Member::class);
     }
+
+    public function getMemberId(string $username): int
+    {
+        return $this
+            ->createQueryBuilder('m')
+            ->select('m.id')
+            ->where('m.username = :username')
+            ->setParameter('username', $username)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

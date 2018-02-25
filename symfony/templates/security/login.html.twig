@@ -4,9 +4,5 @@
 
 {% block body %}
 <h1>Login</h1>
-{% if error %}
-<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
-
 {{ form(form) }}
 {% endblock %}

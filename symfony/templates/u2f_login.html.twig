@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ form(form) }}
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('u2f-api.js') }}"></script>
+<script src="{{ asset('jquery.min.js') }}"></script>
+<script>
+    const complete = function fComplete(u2fResponse)
+    {
+        $('#{{ form.u2fTokenResponse.vars.id }}').val(JSON.stringify(u2fResponse));
+    }
+    var u2fSignRequests = {{ u2fSignRequests | raw }};
+    u2f.sign(u2fSignRequests, complete);
+</script>
+{% endblock %}
