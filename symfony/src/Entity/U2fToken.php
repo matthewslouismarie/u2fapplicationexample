@@ -37,7 +37,7 @@ class U2fToken
     private $member;
 
     /**
-     * @ORM\Column(type="string", length=88)
+     * @ORM\Column(type="string", length=88, unique=true)
      */
     private $publicKey;
 
