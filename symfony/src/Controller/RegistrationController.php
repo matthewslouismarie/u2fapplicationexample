@@ -61,6 +61,7 @@ class RegistrationController extends AbstractController
             );
             $em->persist($member);
             $em->persist($u2fToken);
+            var_dump($u2fToken);
             $em->flush();
         } else {
             $u2fRegisterRequest = $u2fServer->generateRegisterRequest();
