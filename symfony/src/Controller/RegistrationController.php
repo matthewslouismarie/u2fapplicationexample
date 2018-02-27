@@ -62,6 +62,8 @@ class RegistrationController extends AbstractController
             $em->persist($member);
             $em->persist($u2fToken);
             $em->flush();
+
+            return $this->render('successful_registration.html.twig');
         } else {
             $u2fRegisterRequest = $u2fServer->generateRegisterRequest();
             $request
